@@ -1,0 +1,21 @@
+{
+  "name": "nest-with-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com-company:diogo-provi/nest-with-express.git",
+  "author": "Diogo Cezar",
+  "license": "MIT",
+  "scripts": {
+    "start:express": "node ./express/index.js",
+    "start:nestjs": "cd nestjs && nest start",
+    "start:proxy": "node ./index.js",
+    "start": "concurrently --kill-others \"yarn start:express\" \"yarn start:nestjs\" \"yarn start:proxy\""
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "http-proxy-middleware": "^2.0.6"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
