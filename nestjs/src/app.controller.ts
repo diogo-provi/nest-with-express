@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/v2/express')
+  getHelloExpress(): string {
+    return 'Hello World from Express!'
+  }
 }
