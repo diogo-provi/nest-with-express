@@ -1,9 +1,6 @@
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { YupValidationPipe } from '../shared/validations/yup';
-import { UserSchema } from './schemas/user.schema';
 import {
   Controller,
   Get,
@@ -23,10 +20,8 @@ export class UserController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(
-    @Body(new YupValidationPipe(UserSchema)) createUserDto: CreateUserDto,
-  ) {
-    return this.userService.create(createUserDto);
+  create(@Body() userDto: UserDto) {
+    return this.userService.create(userDto);
   }
 
   @Get()
@@ -43,8 +38,8 @@ export class UserController {
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
-  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+  update(@Param('id') id: number, @Body() userDto: UserDto) {
+    return this.userService.update(id, userDto);
   }
 
   @Delete(':id')

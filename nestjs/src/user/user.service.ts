@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -12,11 +11,11 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(userDto: UserDto) {
     const user = new User();
-    user.id = createUserDto.id;
-    user.name = createUserDto.name;
-    user.age = createUserDto.age;
+    user.id = userDto.id;
+    user.name = userDto.name;
+    user.age = userDto.age;
     return await this.userRepository.save(user);
   }
 
@@ -29,10 +28,11 @@ export class UserService {
     return user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, userDto: UserDto) {
     const user = await this.userRepository.findOneBy({ id });
-    user.id = updateUserDto.id;
-    user.name = updateUserDto.name;
+    user.id = userDto.id;
+    user.name = userDto.name;
+    user.age = userDto.age;
     return await this.userRepository.save(user);
   }
 
